@@ -436,10 +436,9 @@ class Lover(Base):
         return inst
 
     def __repr__(self):
-        return u"<%s id='%d' username='%s'>" % (
+        return u"<%s username='%s'>" % (
             self.__class__.__name__,
-            self.id,
-            self.userName.encode('ascii', 'ignore')
+            self.user_name.encode('ascii', 'ignore')
         )
 
 class Stat(Base):
@@ -520,7 +519,7 @@ class ColourLovers(object):
             url = "%s/%s" % (self.API_URL, method)
         else:
             ## make sure hex argument has no hash
-            argument = argument.replace("#", '')
+            argument = str(argument).replace("#", '')
             url = "%s/%s/%s" % (self.API_URL, method, argument)
 
         ## no parameters can be set for 'random'
