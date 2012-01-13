@@ -16,7 +16,43 @@
 # 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
+""" 
+This modules provides access to the ColourLovers API, a web service 
+that allows users to publish colour themes and rate them. The API of
+this webservice allows to search for users (Lovers) and their posted
+contents (Colours, Patterns, Palettes). 
+
+Accessing the API requires an instance of :py:class:`ColourLovers` 
+which provides the methods to access the different content types: 
+*Colour*, *Palette*, *Pattern*, *Lover*. Sending a request to 
+ColourLovers is as easy as calling the corresponding method such as
+:py:meth:`ColourLovers.palettes` to search for palettes. 
+Additionally, the following arguments can be specified ``new``, ``top``, 
+``random`` with additional parameters. Please refer to the ColourLovers 
+API documentation to find out more about the specific parameters and 
+their restrictions at http://www.colourlovers.com/api.
+
+You find the ColourLovers website at: http://www.colourlovers.com
+
+Usage example::
+
+    >>> from colourlovers import ColourLovers
+    >>> cl = ColourLovers()
+    >>> cl.color('#37cbff')
+    [<Colour id='4767129' title='i feel pretty' rgb=(55, 203, 255)>]
+    >>> cl.palettes('new', keywords='funky', numResults=3)
+    [<Palette id='1940972' title='"Funky President"'>,
+     <Palette id='1936394' title='Barbie Doll Blonde'>,
+     <Palette id='1936247' title='Lily's Rainbow'>]
+
+Another example::
+
+    >>> cl.patterns('random')
+    [<Pattern id='391644' title='acanalado'>]
+    >>> cl.colors('top', numResults=3)
+    [<Colour id='14' title='Black' rgb=(0, 0, 0)>,
+     <Colour id='16' title='white' rgb=(255, 255, 255)>,
+     <Colour id='1086335' title='dutch teal' rgb=(22, 147, 165)>]
 """
 
 import re
@@ -323,6 +359,18 @@ class ColourLovers(object):
         pass
 
     def stats(self, stat_type):
+        """ Return the stats for *stat_type*. *stat_type* refers to one 
+            of the content types on ColourLovers and can be ``colors``, 
+            ``lovers``, ``patterns``, ``palettes``. A 
+            :py:exc:`ColourLoversError` is raised when an invalid type is 
+            requested.
+
+            Args:
+                **stat_type (str)**: content type to request stats for.
+
+            Returns:
+                The requested stats as :py:class:`Stat` object.
+        """
         if stat_type not in ['colors', 'lovers', 'patterns', 'palettes']:
             raise ColourLoversError("cannot retrieve stats for '%s'", stat_type)
 
@@ -369,6 +417,14 @@ class ColourLovers(object):
 
     @staticmethod
     def __check_response(response):
+        """ Check the *response* for valid XML. An invalid request
+            raises :py:class:ColourLoversError. An invalid request is determined
+            by an empty response XML. ColourLovers does not provide 
+            additional error infomation.
+            
+            Keywords arguments:
+            response -- string as returned by the ColourLovers API.
+        """
         try:
             xml = ElementTree.XML(response)
         except:
