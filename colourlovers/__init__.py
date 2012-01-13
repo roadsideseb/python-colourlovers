@@ -21,21 +21,32 @@ class ColourLoversError(BaseException):
 
 class Base(object):
 
-    __CAPITAL_SPLIT = re.compile(r'([a-z]+)([A-Z][^A-Z]*)*')
-    __NUMBER_MAPPING = {
-        'id': int,
-        'num_views': int,
-        'num_votes': int,
-        'num_comments': int,
-        'num_hearts': float,
+    __CAPITAL_SPLIT = re.compile(r'[A-Z][^A-Z]+')
+    __TYPE_MAP = {
+        'id': 'int',
+        'rank': 'int',
+        'rating': 'int',
+        'num_views': 'int',
+        'num_votes': 'int',
+        'num_lovers': 'int',
+        'num_colors': 'int',
+        'num_hearts': 'float',
+        'num_palettes': 'int',
+        'num_patterns': 'int',
+        'num_comments': 'int',
+        'num_comments_made': 'int',
+        'num_comments_on_profile': 'int',
+        'colorWidth': 'float',
+        'date_created': 'date',
+        'date_registered': 'date',
+        'date_last_active': 'date',
     }
 
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
-            if key.startswith('date'):
-                value = datetime.strptime(value, DATE_FORMAT)
-            elif key in self.__NUMBER_MAPPING:
-                value = self.__NUMBER_MAPPING[key](value)
+            if key in self.__TYPE_MAP:
+                datatype = self.__TYPE_MAP[key]
+                value = getattr(self, 'convert_%s' % datatype)(value)
 
             setattr(self, key, value)
 
@@ -48,18 +59,30 @@ class Base(object):
         kwargs = {}
         for child in xml.getchildren():
             if len(child.getchildren()) == 0:
-                attr_name = cls.__name_from_tag(child.tag)
+                attr_name = cls.name_from_tag(child.tag)
                 kwargs[attr_name] = child.text
 
         return cls(**kwargs)
 
     @classmethod
-    def __name_from_tag(cls, tag):
-        one, two = cls.__CAPITAL_SPLIT.findall(tag)[0]
-        if two:
-            return "%s_%s" % (one, two.lower())
-        else:
-            return one
+    def name_from_tag(cls, tag):
+        tag = tag[0].upper() + tag[1:]
+        result = cls.__CAPITAL_SPLIT.findall(tag)
+
+        return '_'.join([x.lower() for x in result])
+
+    @staticmethod
+    def convert_date(value):
+        return datetime.strptime(value, DATE_FORMAT)
+
+    @staticmethod
+    def convert_int(value):
+        return int(value.replace(',', ''))
+
+    @staticmethod
+    def convert_float(value):
+        return float(value)
+
 
 class RGB(object):
     
@@ -113,10 +136,10 @@ class HSV(object):
 
 class Comment(object):
 
-    def __init__(self, date, userName, comments):
-        self.date = date
-        self.userName = userName
-        self.comments = comments
+    def __init__(self, date, username, comments):
+        self.comment_date = date
+        self.comment_user_name = username
+        self.comment_comments = comments 
 
     @classmethod
     def from_xml(cls, xml):

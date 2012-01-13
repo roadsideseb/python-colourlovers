@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
 
 import unittest
+from datetime import datetime
 
 try:
     from xml.etree import ElementTree
@@ -46,6 +48,15 @@ class TestBase(unittest.TestCase):
 
         base = Base.from_xml(xml)
 
+    def test_name_from_tag(self):
+        name = Base.name_from_tag('userNameTest')
+        self.assertEquals(name, 'user_name_test')
+
+        name = Base.name_from_tag('dateCreated')
+        self.assertEquals(name, 'date_created')
+
+        name = Base.name_from_tag('id')
+        self.assertEquals(name, 'id')
 
 from colourlovers import Colour 
 
@@ -86,6 +97,26 @@ class TestLover(unittest.TestCase):
 
         lover = Lover.from_xml(xml)
 
+        self.assertEquals(lover.user_name, u'electrikmönk')
+        self.assertEquals(lover.date_registered, datetime(2005, 8, 7, 6, 45, 47))
+        self.assertEquals(lover.date_last_active, datetime(2008, 3, 16, 21, 2, 1))
+        self.assertEquals(lover.rating, 554159)
+        self.assertEquals(lover.location, u'#FF0000stick, LA, US')
+        self.assertEquals(lover.num_colors, 3498)
+        self.assertEquals(lover.num_palettes, 2775)
+        self.assertEquals(lover.num_patterns, 36)
+        self.assertEquals(lover.num_comments_made, 7201)
+        self.assertEquals(lover.num_lovers, 710)
+        self.assertEquals(lover.num_comments_on_profile, 672)
+
+        self.assertEquals(len(lover.comments), 1)
+        comment = lover.comments[0]
+        self.assertEquals(comment.comment_date, datetime(2008, 3, 10, 5, 10, 58))
+        self.assertEquals(comment.comment_user_name, u'mashedpotato')
+        self.assertEquals(comment.comment_comments, u'you are so awesome. :x ')
+
+        self.assertEquals(lover.url, u'http://www.colourlovers.com/lover/electrikmonk')
+        self.assertEquals(lover.api_url, u'http://www.colourlovers.com/api/lover/electrikmonk')
 
 from colourlovers import Stat 
 
@@ -113,7 +144,8 @@ class TestColourLovers(unittest.TestCase):
             '6B410'
         )
 
-COLOUR_XML = """<color>
+COLOUR_XML = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<color>
   <id>903893</id>
   <title><![CDATA[wet dirt]]></title>
   <userName><![CDATA[jessicabrown]]></userName>
@@ -141,7 +173,8 @@ COLOUR_XML = """<color>
   <apiUrl>http://www.colourlovers.com/api/color/6B4106</apiUrl>
 </color>"""
 
-PALETTE_XML = """<palette>
+PALETTE_XML = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<palette>
     <id>12345</id>
     <title><![CDATA[be my boy]]></title>
     <userName><![CDATA[sinta schneider]]></userName>
@@ -167,7 +200,8 @@ PALETTE_XML = """<palette>
     <apiUrl>http://www.colourlovers.com/api/palette/293826</apiUrl>
   </palette>"""
 
-PATTERN_XML = """<pattern>
+PATTERN_XML = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<pattern>
     <id>12345</id>
     <title><![CDATA[Tenderness.]]></title>
     <userName><![CDATA[not.an.am.person]]></userName>
@@ -191,9 +225,10 @@ PATTERN_XML = """<pattern>
     <apiUrl>http://www.colourlovers.com/api/pattern/49471</apiUrl>
   </pattern>"""
 
-LOVER_XML = """<lover>
+LOVER_XML = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lover>
     <id>12345</id>
-    <userName><![CDATA[electrikmonk]]></userName>
+    <userName><![CDATA[electrikmönk]]></userName>
     <dateRegistered>2005-08-07 6:45:47</dateRegistered>
     <dateLastActive>2008-03-16 21:02:01</dateLastActive>
     <rating>554159</rating>
