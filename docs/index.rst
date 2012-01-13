@@ -6,10 +6,69 @@
 Welcome to python-colourlovers's documentation!
 ===============================================
 
-Contents:
+.. automodule:: colourlovers
 
-.. toctree::
-   :maxdepth: 2
+ColourLovers
+------------
+
+.. autoclass:: colourlovers.ColourLovers
+
+    .. method:: color(argument, **kwargs)
+
+    .. method:: colors(argument, **kwargs)
+
+    .. method:: palette(argument, **kwargs)
+
+    .. method:: palettes(argument, **kwargs)
+
+    .. method:: pattern(argument, **kwargs)
+
+    .. method:: patterns(argument, **kwargs)
+
+    .. method:: lover(argument, **kwargs)
+
+    .. method:: lovers(argument, **kwargs)
+
+    .. automethod:: colourlovers.ColourLovers.stats
+
+Colour
+------
+
+.. autoclass:: colourlovers.Colour
+    :members:
+
+Palette
+-------
+
+.. autoclass:: colourlovers.Palette
+    :members:
+
+Pattern
+-------
+
+.. autoclass:: colourlovers.Pattern
+    :members:
+
+Lover
+-----
+
+.. autoclass:: colourlovers.Lover
+    :members:
+
+Stat
+----
+
+.. autoclass:: colourlovers.Stat
+    :members:
+
+The RGB and HSV colour classes
+------------------------------
+
+.. autoclass:: colourlovers.RGB
+    :members:
+
+.. autoclass:: colourlovers.HSV
+    :members:
 
 Indices and tables
 ==================
