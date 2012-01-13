@@ -24,6 +24,7 @@ class Base(object):
     __CAPITAL_SPLIT = re.compile(r'[A-Z][^A-Z]+')
     __TYPE_MAP = {
         'id': 'int',
+        'hex': 'hex',
         'rank': 'int',
         'rating': 'int',
         'num_views': 'int',
@@ -83,6 +84,9 @@ class Base(object):
     def convert_float(value):
         return float(value)
 
+    @staticmethod
+    def convert_hex(value):
+        return '#' + value.lower()
 
 class RGB(object):
     
@@ -168,8 +172,8 @@ class Colour(Base):
     def from_xml(cls, xml):
         inst = super(Colour, cls).from_xml(xml)
 
-        inst.hsv = HSV.from_xml(xml.find('hsv'))
         inst.rgb = RGB.from_xml(xml.find('rgb'))
+        inst.hsv = HSV.from_xml(xml.find('hsv'))
 
         return inst
 

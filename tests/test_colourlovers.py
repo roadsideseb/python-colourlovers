@@ -66,6 +66,30 @@ class TestColour(unittest.TestCase):
         xml = ElementTree.XML(COLOUR_XML)
 
         colour = Colour.from_xml(xml)
+        self.assertEquals(colour.id, 903893)
+        self.assertEquals(colour.title, u'wet dirt')
+        self.assertEquals(colour.user_name, u'jessicabrown')
+        self.assertEquals(colour.num_views, 0)
+        self.assertEquals(colour.num_votes, 0)
+        self.assertEquals(colour.num_comments, 0)
+        self.assertEquals(colour.num_hearts, 0)
+        self.assertEquals(colour.rank, 903853)
+        self.assertEquals(colour.date_created, datetime(2008, 3, 17, 11, 22, 21))
+        self.assertEquals(colour.hex, '#6b4106')
+        
+        self.assertEquals(colour.rgb.red, 107)
+        self.assertEquals(colour.rgb.green, 65)
+        self.assertEquals(colour.rgb.blue, 6)
+
+        self.assertEquals(colour.hsv.hue, 35)
+        self.assertEquals(colour.hsv.saturation, 94)
+        self.assertEquals(colour.hsv.value, 42)
+
+        self.assertEquals(colour.description, None) 
+        self.assertEquals(colour.url, 'http://www.colourlovers.com/color/6B4106/wet_dirt')
+        self.assertEquals(colour.image_url, u'http://www.colourlovers.com/img/6B4106/100/100/wet_dirt.png')
+        self.assertEquals(colour.badge_url, u'http://www.colourlovers.com/images/badges/c/903/903893_wet_dirt.png')
+        self.assertEquals(colour.api_url, u'http://www.colourlovers.com/api/color/6B4106')
 
 
 from colourlovers import Palette 
