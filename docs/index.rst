@@ -65,10 +65,39 @@ The RGB and HSV colour classes
 ------------------------------
 
 .. autoclass:: colourlovers.RGB
-    :members:
+    
+    .. automethod:: colourlovers.RGB.from_xml
+
+    .. attribute:: red
+
+        Red colour channel in range [0, 255]       
+
+    .. attribute:: green
+
+        Green colour channel in range [0, 255]       
+
+    .. attribute:: blue
+
+        Blue colour channel in range [0, 255]       
+
+    .. autoattribute:: colourlovers.RGB.hex
 
 .. autoclass:: colourlovers.HSV
-    :members:
+    
+    .. automethod:: colourlovers.HSV.from_xml
+
+    .. attribute:: hue 
+
+        HSV hue channel in range [0, 360]       
+
+    .. attribute:: saturation 
+
+        HSV saturation channel in range [0, 255]       
+
+    .. attribute:: value 
+
+        HSV value channel in range [0, 255]       
+
 
 Indices and tables
 ==================

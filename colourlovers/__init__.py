@@ -74,6 +74,9 @@ class ColourLoversError(BaseException):
     pass
 
 class Base(object):
+    """ Define the base class for content types as provided
+        by the ColourLovers API.
+    """
 
     __CAPITAL_SPLIT = re.compile(r'[A-Z][^A-Z]+')
     __TYPE_MAP = {
@@ -107,10 +110,23 @@ class Base(object):
 
     @classmethod
     def tag(cls):
+        """ Abstract method to be overwritten in subclasses. Should
+            return the tag used in the XML response to identify the
+            corresponding content type.
+        """
         raise NotImplementedError()
 
     @classmethod
     def from_xml(cls, xml):
+        """ Parse *xml* and generate class attributes for each immediate 
+            child of the root element without children of their own. 
+
+            Args:
+                *xml (``Element``)*: xml element of content type.
+
+            Returns:
+                Instance of calling class.
+        """
         kwargs = {}
         for child in xml.getchildren():
             if len(child.getchildren()) == 0:
@@ -121,6 +137,16 @@ class Base(object):
 
     @classmethod
     def name_from_tag(cls, tag):
+        """ Generate a Pythonic attribute name from the
+            CamelCase tag names provided in the ColourLovers XML
+            response. 
+
+            Args:
+                *tag (str)*: XML tag name in CamelCase.
+
+            Returns:
+                Pythonic attribute name as ``str``.
+        """
         tag = tag[0].upper() + tag[1:]
         result = cls.__CAPITAL_SPLIT.findall(tag)
 
@@ -128,33 +154,91 @@ class Base(object):
 
     @staticmethod
     def convert_date(value):
+        """ Convert date in *value* to corresponding
+            ``datetime.datetime`` format.
+
+            Args:
+                *value (str)*: date & time representation.
+
+            Returns:
+                ``datetime.datetime`` object according to format.
+        """
         return datetime.strptime(value, DATE_FORMAT)
 
     @staticmethod
     def convert_int(value):
+        """ Convert *value* to ``int``. *value* might contain ',' to
+            separate the thousand, million, etc. digits block.
+
+            Args:
+                *value (str)*: integer value to convert.
+
+            Returns:
+                ``int`` of value.
+        """
         return int(value.replace(',', ''))
 
     @staticmethod
     def convert_float(value):
+        """ Convert *value* to ``float``.
+
+            Args:
+                *value (str)*: float value to convert.
+
+            Returns:
+                ``float`` of value.
+        """
         return float(value)
 
     @staticmethod
     def convert_hex(value):
+        """ Convert hex colour code in *value* as received from 
+            API response to '#xxxxxx' format. Letters in hex format
+            are lowercase.
+
+            Args:
+                *value (str)*: value containing hex colour code.
+
+            Returns:
+                Cleaned up hex colour code as ``str``.
+        """
         return '#' + value.lower()
 
 class RGB(object):
+    """ Define a RGB colour as a triple of integers in the 
+        range from 0 to 255. The colour channels are stored in 
+        attributes :py:attr:`red`, :py:attr:`green`, :py:attr:`blue`.
+    """
     
     def __init__(self, red, green, blue):
+        """ Construct an instance of :py:class:`RGB` from *red*, *green*
+            and *blue*. The three colour values have to be whole numbers
+            in the range [0, 255].
+
+            Args:
+                *red (int, str)*: integer value for the red channel.
+                *green (int, str)*: integer value for the green channel.
+                *blue (int, str)*: integer value for the blue channel.
+        """
         self.red = int(red)
         self.green = int(green)
         self.blue = int(blue)
 
     @property
     def hex(self):
+        """ Return hex colour code corresponding to the RGB value. """
         return '#%02x%02x%02x' % (self.red, self.green, self.blue) 
 
     @classmethod
     def from_xml(cls, xml):
+        """ Create an instance of :py:class:`RGB` from *xml*. 
+
+            Args:
+                *xml (Element)*: ``rgb`` element from API response.
+
+            Returns:
+                Instance of :py:class:`RGB`.
+        """
         red = xml.find('red').text
         green = xml.find('green').text
         blue = xml.find('blue').text
@@ -162,6 +246,7 @@ class RGB(object):
         return cls(red, green, blue)
 
     def __repr__(self):
+        """ Return representation of RGB instance. """
         return "<%s (%s, %s, %s)>" % (
             self.__class__.__name__,
             self.red,
@@ -169,15 +254,37 @@ class RGB(object):
             self.blue
         )
 
+
 class HSV(object):
+    """ Define a HSV colour instance from *hue*, *saturation* and *value*. 
+        The three values have to be integer values with *hue* in range [0, 360]
+        and *saturation*, *value* in range [0, 255].
+    """
     
     def __init__(self, hue, saturation, value):
+        """ Construct a HSV colour instance from *hue*, *saturation*, *value*.
+            All three values have to be whole numbers. *hue* has to be in range
+            [0, 360], *saturation* and *value* have to be in range [0, 255].
+
+            Args:
+                *hue (int, str)*: HSV hue channel value.
+                *saturation (int, str)*: HSV saturation channel value.
+                *value (int, str)*: HSV value channel value.
+        """
         self.hue = int(hue)
         self.saturation = int(saturation)
         self.value = int(value)
 
     @classmethod
     def from_xml(cls, xml):
+        """ Create an instance of :py:class:`HSV` from *xml*. 
+
+            Args:
+                *xml (Element)*: ``hsv`` element from API response.
+
+            Returns:
+                Instance of :py:class:`HSV`.
+        """
         hue = xml.find('hue').text
         saturation = xml.find('saturation').text
         value = xml.find('value').text
@@ -185,6 +292,7 @@ class HSV(object):
         return cls(hue, saturation, value)
 
     def __repr__(self):
+        """ Return string representation of HSV instance. """
         return "<%s (%s, %s, %s)>" % (
             self.__class__.__name__,
             self.hue,
@@ -366,7 +474,7 @@ class ColourLovers(object):
             requested.
 
             Args:
-                **stat_type (str)**: content type to request stats for.
+                *stat_type (str)*: content type to request stats for.
 
             Returns:
                 The requested stats as :py:class:`Stat` object.
