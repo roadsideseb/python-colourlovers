@@ -117,31 +117,45 @@ class TestPalette(unittest.TestCase):
         xml = ElementTree.XML(PALETTE_XML)
 
         palette = Palette.from_xml(xml)
-#<palette>
-#    <id>12345</id>
-#    <title><![CDATA[be my boy]]></title>
-#    <userName><![CDATA[sinta schneider]]></userName>
-#    <numViews>1052</numViews>
-#    <numVotes>37</numVotes>
-#    <numComments>13</numComments>
-#    <numHearts>4.5</numHearts>
-#    <rank>1</rank>
-#    <dateCreated>2008-03-01 16:19:21</dateCreated>
-#    <colors>
-#      <hex>423238</hex>
-#      <hex>F5DE8C</hex>
-#      <hex>C8D197</hex>
-#      <hex>B3702D</hex>
-#      <hex>EB2138</hex>
-#    </colors>
-#    <!-- Optional color widths [Only returned with the ?showPaletteWidths=1] -->
-#    <colorWidths>0.2,0.2,0.2,0.2,0.2</colorWidths>
-#    <description><![CDATA[]]></description>
-#    <url><![CDATA[http://www.colourlovers.com/palette/293826/be_my_boy]]></url>
-#    <imageUrl><![CDATA[http://www.colourlovers.com/paletteImg/423238/F5DE8C/C8D197/B3702D/EB2138/be_my_boy.png]]></imageUrl>
-#    <badgeUrl><![CDATA[http://www.colourlovers.com/images/badges/p/293/293826_be_my_boy.png]]></badgeUrl>
-#    <apiUrl>http://www.colourlovers.com/api/palette/293826</apiUrl>
-#  </palette>"""
+
+        self.assertEquals(palette.id, 12345)
+        self.assertEquals(palette.title, 'be my boy')
+        self.assertEquals(palette.user_name, 'sinta schneider')
+        self.assertEquals(palette.num_views, 1052)
+        self.assertEquals(palette.num_votes, 37)
+        self.assertEquals(palette.num_comments, 13)
+        self.assertEquals(palette.num_hearts, 4.5)
+        self.assertEquals(palette.rank, 1)
+        self.assertEquals(palette.date_created, datetime(2008, 3, 1, 16, 19, 21))
+
+        self.assertEquals(len(palette.colours), 5)
+        self.assertEquals(palette.colours, [
+            '#423238',
+            '#f5de8c',
+            '#c8d197',
+            '#b3702d',
+            '#eb2138'
+        ])
+
+        self.assertEquals(palette.color_widths, [0.2, 0.2, 0.2, 0.2, 0.2])
+        
+        self.assertEquals(palette.description, None)
+        self.assertEquals(
+            palette.url, 
+            'http://www.colourlovers.com/palette/293826/be_my_boy'
+        )
+        self.assertEquals(
+            palette.image_url,
+            'http://www.colourlovers.com/paletteImg/423238/F5DE8C/C8D197/B3702D/EB2138/be_my_boy.png'
+        )
+        self.assertEquals(
+            palette.badge_url,
+            'http://www.colourlovers.com/images/badges/p/293/293826_be_my_boy.png'
+        )
+        self.assertEquals(
+            palette.api_url,
+            'http://www.colourlovers.com/api/palette/293826'
+        )
 
 
 from colourlovers import Pattern
@@ -207,6 +221,7 @@ class TestLover(unittest.TestCase):
 
         self.assertEquals(lover.url, u'http://www.colourlovers.com/lover/electrikmonk')
         self.assertEquals(lover.api_url, u'http://www.colourlovers.com/api/lover/electrikmonk')
+
 
 from colourlovers import Stat 
 

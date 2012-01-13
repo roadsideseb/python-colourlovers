@@ -94,7 +94,7 @@ class Base(object):
         'num_comments': 'int',
         'num_comments_made': 'int',
         'num_comments_on_profile': 'int',
-        'colorWidth': 'float',
+        'color_widths': 'float_list',
         'date_created': 'date',
         'date_registered': 'date',
         'date_last_active': 'date',
@@ -203,6 +203,18 @@ class Base(object):
                 Cleaned up hex colour code as ``str``.
         """
         return '#' + value.lower()
+
+    @staticmethod
+    def convert_float_list(value):
+        """ Convert a list of floats in *value* to a Python list.
+
+            Args:
+                *value (str)*: value containing list of floats.
+
+            Returns:
+                Float values as ``list``.
+        """
+        return [float(x.strip()) for x in value.split(',')]
 
 class RGB(object):
     """ Define a RGB colour as a triple of integers in the 
