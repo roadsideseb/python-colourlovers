@@ -15,19 +15,19 @@ ColourLovers
 
     .. method:: color(argument, **kwargs)
 
-    .. method:: colors(argument, **kwargs)
+    .. method:: colors(argument=None, **kwargs)
 
     .. method:: palette(argument, **kwargs)
 
-    .. method:: palettes(argument, **kwargs)
+    .. method:: palettes(argument=None, **kwargs)
 
     .. method:: pattern(argument, **kwargs)
 
-    .. method:: patterns(argument, **kwargs)
+    .. method:: patterns(argument=None, **kwargs)
 
     .. method:: lover(argument, **kwargs)
 
-    .. method:: lovers(argument, **kwargs)
+    .. method:: lovers(argument=None, **kwargs)
 
     .. automethod:: colourlovers.ColourLovers.stats
 
