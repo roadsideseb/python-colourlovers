@@ -260,6 +260,24 @@ class TestColourLovers(unittest.TestCase):
              'colors', 'palettes', 'patterns', 'lovers', 'stats']
         )
 
+    def test_convert_keywords(self):
+        keywords = {
+            "order_col": 'score',
+            "sortBy": 'DESC',
+            "num_results": 20,
+            "result_offset": 5,
+            "format": 'json',
+            "jsonCallback": 'somecallbackfunction',
+        }
+        converted_keywords = ColourLovers().convert_keywords(keywords)
+
+        self.assertEquals(len(converted_keywords), 4)
+        self.assertItemsEqual(
+            converted_keywords.keys(),
+            ['orderCol', 'sortBy', 'numResults', 'resultOffset']
+        )
+
+
     def test_colors(self):
         cl_api = ColourLovers()
 

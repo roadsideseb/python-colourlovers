@@ -313,14 +313,33 @@ class HSV(object):
         )
 
 class Comment(object):
+    """ The comment class represents a comment for a ColourLovers
+        user as returned by the *lovers* API request. The comment
+        provides the *date*, *username* and *comments* text. 
+    """
 
     def __init__(self, date, username, comments):
+        """ Create a comment created at *date* from user *username* 
+            with the comment text in *comments*. *date* has to be
+            a datetime object.
+        """
         self.comment_date = date
         self.comment_user_name = username
         self.comment_comments = comments 
 
     @classmethod
     def from_xml(cls, xml):
+        """ Create a comment object from *xml*. It expects a DOM 
+            element ``<comment>`` and extracts date, username and
+            comment text from its sub-elements as describe in the
+            ColourLovers API.
+
+            Args:
+                xml (Element): ``comment`` DOM element.
+
+            Returns:
+                New instance of class :py:class:`Comment`.
+        """
         return cls(
             datetime.strptime(
                 xml.find('commentDate').text,
@@ -540,9 +559,11 @@ class ColourLovers(object):
         if argument == 'random':
             kwargs = {}
 
+        converted_kwargs = self.convert_keywords(kwargs)
+
         request = urllib2.Request(
             url, 
-            data=urllib.urlencode(kwargs),
+            data=urllib.urlencode(converted_kwargs),
             headers={'User-Agent': "ColourLovers Browser"}
         )
 
@@ -551,6 +572,22 @@ class ColourLovers(object):
     @classmethod
     def valid_methods(cls):
         return cls.__SPECIFIC_METHODS+cls.__SEARCH_METHODS+['stats']
+
+    def convert_keywords(self, keywords):
+        converted = {}
+        for key, value in keywords.items():
+            key_parts = key.split('_')
+
+            new_key = key_parts[:1]
+            for key_part in key_parts[1:]:
+                new_key.append(key_part.capitalize())
+                
+            new_key = ''.join(new_key)
+
+            if new_key not in ['format', 'jsonCallback']:
+                converted[new_key] = value
+
+        return converted
 
     @staticmethod
     def __check_response(response):
