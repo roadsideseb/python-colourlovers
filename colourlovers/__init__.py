@@ -474,6 +474,11 @@ class ColourLovers(object):
         'stats': Stat,
     }
 
+    __SPECIFIC_METHODS = ['color', 'palette', 'pattern', 'lover']
+    __SEARCH_METHODS = ['colors', 'palettes', 'patterns', 'lovers']
+
+    __ARGUMENTS = [None, 'new', 'top', 'random']
+
     def __init__(self):
         pass
 
@@ -498,9 +503,18 @@ class ColourLovers(object):
         return Stat.from_xml(xml)
 
     def __getattr__(self, method):
+        if method not in self.__SPECIFIC_METHODS+self.__SEARCH_METHODS:
+            raise ColourLoversError("invalid API method '%s'", method)
+
         def proxy(argument=None, method=method, **kwargs):
+            if method in self.__SEARCH_METHODS \
+                and argument not in self.__ARGUMENTS: 
+                    raise ColourLoversError(
+                        "%s is invalid argument for '%s'" % (argument, method)
+                    )
             xml = self.__call(method, argument, **kwargs)
             return self.__process(method, xml)
+
         return proxy
 
     def __process(self, method, xml):
@@ -534,6 +548,10 @@ class ColourLovers(object):
 
         return self.__check_response(urllib2.urlopen(request).read())
 
+    @classmethod
+    def valid_methods(cls):
+        return cls.__SPECIFIC_METHODS+cls.__SEARCH_METHODS+['stats']
+
     @staticmethod
     def __check_response(response):
         """ Check the *response* for valid XML. An invalid request
@@ -551,5 +569,3 @@ class ColourLovers(object):
                 "could not retrieve result for your request"
             )
         return xml
-
-

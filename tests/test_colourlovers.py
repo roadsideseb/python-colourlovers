@@ -238,16 +238,43 @@ from colourlovers import ColourLovers
 
 class TestColourLovers(unittest.TestCase):
 
-    def test_method_calls(self):
+    def test_color(self):
         cl_api = ColourLovers()
-        res = cl_api.color('6B4106')
-        res = cl_api.color('#6B4106')
+
+        for hexstr in ['6B4106', '#6b4106']:
+            res = cl_api.color(hexstr)
+            self.assertEquals(len(res), 1)
+            self.assertEquals(type(res[0]), Colour)
+            self.assertEquals(res[0].hex, '#6b4106')
 
         self.assertRaises(
             ColourLoversError,
             cl_api.color,
             '6B410'
         )
+
+    def test_valid_methods(self):
+        self.assertEquals(
+            ColourLovers.valid_methods(),
+            ['color', 'palette', 'pattern', 'lover',
+             'colors', 'palettes', 'patterns', 'lovers', 'stats']
+        )
+
+    def test_colors(self):
+        cl_api = ColourLovers()
+
+        for argument in ['new', 'top', 'random']:
+            results = cl_api.colors(argument)
+
+            for result in results:
+                self.assertEquals(type(result), Colour)
+
+        self.assertRaises(
+            ColourLoversError,
+            cl_api.colors,
+            'invalid_argument'
+        )
+
 
 COLOUR_XML = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <color>
