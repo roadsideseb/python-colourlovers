@@ -232,6 +232,7 @@ Palette
     .. attribute:: color_widths	
     
         This Palette's Color's widths in the range [0.0, 1.0] as ``float``. 
+
         **Note:** this attribute is optional and might not be present if not
         returned by the API response.
 
@@ -380,7 +381,8 @@ Lover
     .. attribute:: comments
         
         Last 10 comments made on this Lover's profile as list of
-        :py:class:`Comment`s.
+        :py:class:`Comment` instances.
+
         **Note:** this attribute is optional. It is only returned
         when sending the parameter ``comments=1`` in the request.
 
