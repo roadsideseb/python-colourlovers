@@ -350,19 +350,34 @@ class Comment(object):
         )
 
 class Colour(Base):
+    """ This class defines a ColourLovers colour in the RGB and
+        HSV colour spaces. The colour values can be accessed through
+        the :py:attr:`rgb` and :py:attr:`hsv` respectively and are
+        of type :py:class:`RGB` and :py:class:`HSV`. 
+    """
 
     def __init__(self, **kwargs):
         super(Colour, self).__init__(**kwargs)
 
-        self.rgb = None
-        self.hsv = None
+        self.rgb = None 
+        self.hsv = None 
 
     @classmethod
     def tag(cls):
+        """ Returns the name of the XML tag for a colour object. """
         return 'color'
 
     @classmethod
     def from_xml(cls, xml):
+        """ Create a new colour instance from *xml*. *xml* is a DOM
+            element with the root element name ``color``.
+
+            Args:
+                xml (Element): ``color`` DOM element.
+
+            Returns:
+                New instance of :py:class:`Colour`.
+        """
         inst = super(Colour, cls).from_xml(xml)
 
         inst.rgb = RGB.from_xml(xml.find('rgb'))
@@ -371,6 +386,7 @@ class Colour(Base):
         return inst
 
     def __repr__(self):
+        """ Return a representation of :py:class:`Colour` instance. """
         return "<%s id='%d' title='%s' rgb=(%d, %d, %d)>" % (
             self.__class__.__name__,
             self.id,
