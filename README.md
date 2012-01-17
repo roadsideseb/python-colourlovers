@@ -41,6 +41,7 @@ For details on additional parameters please refer to the documentation at
 http://python-colourlovers.readthedoc.org
 
 Example:
+
 ```python
 >>> from colourlovers import ColourLovers
 >>> cl = ColourLovers()
@@ -69,6 +70,7 @@ For details on additional parameters please refer to the documentation at
 http://python-colourlovers.readthedoc.org
 
 Example:
+
 ```python
 >>> from colourlovers import ColourLovers
 >>> cl = ColourLovers()
@@ -95,6 +97,7 @@ For details on additional parameters please refer to the documentation at
 http://python-colourlovers.readthedoc.org
 
 Example:
+
 ```python
 >>> from colourlovers import ColourLovers
 >>> cl = ColourLovers()
@@ -124,6 +127,7 @@ http://python-colourlovers.readthedoc.org
 
 
 Example:
+
 ```python
 >>> from colourlovers import ColourLovers
 >>> cl = ColourLovers()
@@ -146,6 +150,7 @@ returns a ``ColourLovers.Stats`` instance holding the total number of the
 requested content type on ColourLovers.com.
 
 Example:
+
 ```python
 >>> from colourlovers import ColourLovers
 >>> cl = ColourLovers()
