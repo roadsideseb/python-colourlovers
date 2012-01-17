@@ -141,13 +141,11 @@ ColourLovers.com you can call ``ColourLovers.stats`` with one of the following
 returns a ``ColourLovers.Stats`` instance holding the total number of the 
 requested content type on ColourLovers.com.
 
-Example:
+.. Example::
 
-``` python
->>> from colourlovers import ColourLovers
->>> cl = ColourLovers()
->>> cl.stats('lovers')
-<Stat total='1113083'>
->>> cl.stats('patterns')
-<Stat total='2096087'>
-```
+    >>> from colourlovers import ColourLovers
+    >>> cl = ColourLovers()
+    >>> cl.stats('lovers')
+    <Stat total='1113083'>
+    >>> cl.stats('patterns')
+    <Stat total='2096087'>
