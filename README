@@ -143,12 +143,11 @@ requested content type on ColourLovers.com.
 
 Example:
 
-.. code-block:: pycon
-    :linenos:
-
-    >>> from colourlovers import ColourLovers
-    >>> cl = ColourLovers()
-    >>> cl.stats('lovers')
-    <Stat total='1113083'>
-    >>> cl.stats('patterns')
-    <Stat total='2096087'>
+``` python
+>>> from colourlovers import ColourLovers
+>>> cl = ColourLovers()
+>>> cl.stats('lovers')
+<Stat total='1113083'>
+>>> cl.stats('patterns')
+<Stat total='2096087'>
+```
