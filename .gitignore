@@ -1,2 +1,5 @@
 *.py[oc]
 *.sw[op]
+
+build
+docs/_build
