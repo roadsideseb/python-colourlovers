@@ -40,16 +40,17 @@ colour or a list of colours.
 For details on additional parameters please refer to the documentation at
 http://python-colourlovers.readthedoc.org
 
-Example::
-
-    >>> from colourlovers import ColourLovers
-    >>> cl = ColourLovers()
-    >>> cl.color('#37cbff')
-    [<Colour id='4767129' title='i feel pretty' rgb=(55, 203, 255)>]
-    >>> cl.palettes('new', keywords='funky', numResults=3)
-    [<Palette id='1940972' title='"Funky President"'>,
-     <Palette id='1936394' title='Barbie Doll Blonde'>,
-     <Palette id='1936247' title='Lily's Rainbow'>]    
+Example:
+```python
+>>> from colourlovers import ColourLovers
+>>> cl = ColourLovers()
+>>> cl.color('#37cbff')
+[<Colour id='4767129' title='i feel pretty' rgb=(55, 203, 255)>]
+>>> cl.palettes('new', keywords='funky', numResults=3)
+[<Palette id='1940972' title='"Funky President"'>,
+ <Palette id='1936394' title='Barbie Doll Blonde'>,
+ <Palette id='1936247' title='Lily's Rainbow'>]    
+ ```
 
 Palettes
 --------
@@ -67,14 +68,15 @@ palette or a list of palettes:
 For details on additional parameters please refer to the documentation at
 http://python-colourlovers.readthedoc.org
 
-Example::
-
-    >>> from colourlovers import ColourLovers
-    >>> cl = ColourLovers()
-    >>> cl.palettes('random')
-    [<Palette id='114699' title='chunky butt'>]
-    >>> cl.palette(1942043)
-    [<Palette id='1942043' title='Drinking Game 2'>]
+Example:
+```python
+>>> from colourlovers import ColourLovers
+>>> cl = ColourLovers()
+>>> cl.palettes('random')
+[<Palette id='114699' title='chunky butt'>]
+>>> cl.palette(1942043)
+[<Palette id='1942043' title='Drinking Game 2'>]
+```
 
 Patterns
 --------
@@ -92,14 +94,15 @@ pattern or a list of patterns.
 For details on additional parameters please refer to the documentation at
 http://python-colourlovers.readthedoc.org
 
-Example::
-
-    >>> from colourlovers import ColourLovers
-    >>> cl = ColourLovers()
-    >>> cl.patterns('random')
-    [<Pattern id='391644' title='acanalado'>]
-    >>> cl.pattern(2111513)
-    [<Pattern id='2111513' title='Converse on Nothing'>]
+Example:
+```python
+>>> from colourlovers import ColourLovers
+>>> cl = ColourLovers()
+>>> cl.patterns('random')
+[<Pattern id='391644' title='acanalado'>]
+>>> cl.pattern(2111513)
+[<Pattern id='2111513' title='Converse on Nothing'>]
+```
 
 
 Lovers
@@ -120,17 +123,18 @@ For details on additional parameters please refer to the documentation at
 http://python-colourlovers.readthedoc.org
 
 
-Example::
-
-    >>> from colourlovers import ColourLovers
-    >>> cl = ColourLovers()
-    >>> cl.lovers('new', numResults=4)
-    [<Lover username='alliesuesue'>,
-     <Lover username='NAJ910'>,
-     <Lover username='VooDooDoll23'>,
-     <Lover username='kidknie'>]
-    >>> cl.lover('Alkalaiblue')
-    [<Lover username='Alkalaiblue'>]
+Example:
+```python
+>>> from colourlovers import ColourLovers
+>>> cl = ColourLovers()
+>>> cl.lovers('new', numResults=4)
+[<Lover username='alliesuesue'>,
+ <Lover username='NAJ910'>,
+ <Lover username='VooDooDoll23'>,
+ <Lover username='kidknie'>]
+>>> cl.lover('Alkalaiblue')
+[<Lover username='Alkalaiblue'>]
+```
 
 Stats
 -----
@@ -141,6 +145,7 @@ ColourLovers.com you can call ``ColourLovers.stats`` with one of the following
 returns a ``ColourLovers.Stats`` instance holding the total number of the 
 requested content type on ColourLovers.com.
 
+Example:
 ```python
 >>> from colourlovers import ColourLovers
 >>> cl = ColourLovers()
