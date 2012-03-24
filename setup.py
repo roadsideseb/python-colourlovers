@@ -18,7 +18,6 @@
 
 from distutils.core import setup
 
-import colourlovers 
 
 setup(
     name = 'python-colourlovers',
@@ -28,7 +27,7 @@ setup(
     url = 'http://python-colourlovers.readthedocs.org',
 
     description = 'An API providing access to the ColourLovers website.',
-    long_description = colourlovers.__doc__,
+    long_description = open('README.rst', 'r').read(),
 
     packages = [
         'colourlovers', 
@@ -50,5 +49,5 @@ setup(
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python',
         'Topic :: Software Development :: Libraries :: Python Modules',
-    ]
+    ],
 )
