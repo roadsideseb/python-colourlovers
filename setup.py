@@ -22,7 +22,7 @@ import colourlovers
 
 setup(
     name = 'python-colourlovers',
-    version = '0.1.0',
+    version = '0.0.1',
     author = 'Sebastian Vetter',
     author_email = 'sebastian@roadside-developer.com',
     url = 'http://python-colourlovers.readthedocs.org',
