@@ -1,35 +1,35 @@
 ﻿#! /usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# python-colourlovers - A Python API to http://www.colourlovers.com 
+# python-colourlovers - A Python API to http://www.colourlovers.com
 # Copyright (C) 2012 Sebastian Vetter
-# 
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-""" 
-This modules provides access to the ColourLovers API, a web service 
+"""
+This module provides access to the ColourLovers API, a web service
 that allows users to publish colour themes and rate them. The API of
 this webservice allows to search for users (Lovers) and their posted
-contents (Colours, Patterns, Palettes). 
+contents (Colours, Patterns, Palettes).
 
-Accessing the API requires an instance of :py:class:`ColourLovers` 
-which provides the methods to access the different content types: 
-*Colour*, *Palette*, *Pattern*, *Lover*. Sending a request to 
+Accessing the API requires an instance of :py:class:`ColourLovers`
+which provides the methods to access the different content types:
+*Colour*, *Palette*, *Pattern*, *Lover*. Sending a request to
 ColourLovers is as easy as calling the corresponding method such as
-:py:meth:`ColourLovers.palettes` to search for palettes. 
-Additionally, the following arguments can be specified ``new``, ``top``, 
-``random`` with additional parameters. Please refer to the ColourLovers 
-API documentation to find out more about the specific parameters and 
+:py:meth:`ColourLovers.palettes` to search for palettes.
+Additionally, the following arguments can be specified ``new``, ``top``,
+``random`` with additional parameters. Please refer to the ColourLovers
+API documentation to find out more about the specific parameters and
 their restrictions at http://www.colourlovers.com/api.
 
 You find the ColourLovers website at: http://www.colourlovers.com
@@ -118,8 +118,8 @@ class Base(object):
 
     @classmethod
     def from_xml(cls, xml):
-        """ Parse *xml* and generate class attributes for each immediate 
-            child of the root element without children of their own. 
+        """ Parse *xml* and generate class attributes for each immediate
+            child of the root element without children of their own.
 
             Args:
                 *xml (``Element``)*: xml element of content type.
@@ -139,7 +139,7 @@ class Base(object):
     def name_from_tag(cls, tag):
         """ Generate a Pythonic attribute name from the
             CamelCase tag names provided in the ColourLovers XML
-            response. 
+            response.
 
             Args:
                 *tag (str)*: XML tag name in CamelCase.
@@ -192,7 +192,7 @@ class Base(object):
 
     @staticmethod
     def convert_hex(value):
-        """ Convert hex colour code in *value* as received from 
+        """ Convert hex colour code in *value* as received from
             API response to '#xxxxxx' format. Letters in hex format
             are lowercase.
 
@@ -217,11 +217,11 @@ class Base(object):
         return [float(x.strip()) for x in value.split(',')]
 
 class RGB(object):
-    """ Define a RGB colour as a triple of integers in the 
-        range from 0 to 255. The colour channels are stored in 
+    """ Define a RGB colour as a triple of integers in the
+        range from 0 to 255. The colour channels are stored in
         attributes :py:attr:`red`, :py:attr:`green`, :py:attr:`blue`.
     """
-    
+
     def __init__(self, red, green, blue):
         """ Construct an instance of :py:class:`RGB` from *red*, *green*
             and *blue*. The three colour values have to be whole numbers
@@ -239,11 +239,11 @@ class RGB(object):
     @property
     def hex(self):
         """ Return hex colour code corresponding to the RGB value. """
-        return '#%02x%02x%02x' % (self.red, self.green, self.blue) 
+        return '#%02x%02x%02x' % (self.red, self.green, self.blue)
 
     @classmethod
     def from_xml(cls, xml):
-        """ Create an instance of :py:class:`RGB` from *xml*. 
+        """ Create an instance of :py:class:`RGB` from *xml*.
 
             Args:
                 *xml (Element)*: ``rgb`` element from API response.
@@ -268,11 +268,11 @@ class RGB(object):
 
 
 class HSV(object):
-    """ Define a HSV colour instance from *hue*, *saturation* and *value*. 
+    """ Define a HSV colour instance from *hue*, *saturation* and *value*.
         The three values have to be integer values with *hue* in range [0, 360]
         and *saturation*, *value* in range [0, 255].
     """
-    
+
     def __init__(self, hue, saturation, value):
         """ Construct a HSV colour instance from *hue*, *saturation*, *value*.
             All three values have to be whole numbers. *hue* has to be in range
@@ -289,7 +289,7 @@ class HSV(object):
 
     @classmethod
     def from_xml(cls, xml):
-        """ Create an instance of :py:class:`HSV` from *xml*. 
+        """ Create an instance of :py:class:`HSV` from *xml*.
 
             Args:
                 *xml (Element)*: ``hsv`` element from API response.
@@ -315,21 +315,21 @@ class HSV(object):
 class Comment(object):
     """ The comment class represents a comment for a ColourLovers
         user as returned by the *lovers* API request. The comment
-        provides the *date*, *username* and *comments* text. 
+        provides the *date*, *username* and *comments* text.
     """
 
     def __init__(self, date, username, comments):
-        """ Create a comment created at *date* from user *username* 
+        """ Create a comment created at *date* from user *username*
             with the comment text in *comments*. *date* has to be
             a datetime object.
         """
         self.comment_date = date
         self.comment_user_name = username
-        self.comment_comments = comments 
+        self.comment_comments = comments
 
     @classmethod
     def from_xml(cls, xml):
-        """ Create a comment object from *xml*. It expects a DOM 
+        """ Create a comment object from *xml*. It expects a DOM
             element ``<comment>`` and extracts date, username and
             comment text from its sub-elements as describe in the
             ColourLovers API.
@@ -345,7 +345,7 @@ class Comment(object):
                 xml.find('commentDate').text,
                 DATE_FORMAT
             ),
-            xml.find('commentUserName').text, 
+            xml.find('commentUserName').text,
             xml.find('commentComments').text
         )
 
@@ -353,14 +353,14 @@ class Colour(Base):
     """ This class defines a ColourLovers colour in the RGB and
         HSV colour spaces. The colour values can be accessed through
         the :py:attr:`rgb` and :py:attr:`hsv` respectively and are
-        of type :py:class:`RGB` and :py:class:`HSV`. 
+        of type :py:class:`RGB` and :py:class:`HSV`.
     """
 
     def __init__(self, **kwargs):
         super(Colour, self).__init__(**kwargs)
 
-        self.rgb = None 
-        self.hsv = None 
+        self.rgb = None
+        self.hsv = None
 
     @classmethod
     def tag(cls):
@@ -518,10 +518,10 @@ class ColourLovers(object):
         pass
 
     def stats(self, stat_type):
-        """ Return the stats for *stat_type*. *stat_type* refers to one 
-            of the content types on ColourLovers and can be ``colors``, 
-            ``lovers``, ``patterns``, ``palettes``. A 
-            :py:exc:`ColourLoversError` is raised when an invalid type is 
+        """ Return the stats for *stat_type*. *stat_type* refers to one
+            of the content types on ColourLovers and can be ``colors``,
+            ``lovers``, ``patterns``, ``palettes``. A
+            :py:exc:`ColourLoversError` is raised when an invalid type is
             requested.
 
             Args:
@@ -543,7 +543,7 @@ class ColourLovers(object):
 
         def proxy(argument=None, method=method, **kwargs):
             if method in self.__SEARCH_METHODS \
-                and argument not in self.__ARGUMENTS: 
+                and argument not in self.__ARGUMENTS:
                     raise ColourLoversError(
                         "%s is invalid argument for '%s'" % (argument, method)
                     )
@@ -578,7 +578,7 @@ class ColourLovers(object):
         converted_kwargs = self.convert_keywords(kwargs)
 
         request = urllib2.Request(
-            url, 
+            url,
             data=urllib.urlencode(converted_kwargs),
             headers={'User-Agent': "ColourLovers Browser"}
         )
@@ -597,7 +597,7 @@ class ColourLovers(object):
             new_key = key_parts[:1]
             for key_part in key_parts[1:]:
                 new_key.append(key_part.capitalize())
-                
+
             new_key = ''.join(new_key)
 
             if new_key not in ['format', 'jsonCallback']:
@@ -609,9 +609,9 @@ class ColourLovers(object):
     def __check_response(response):
         """ Check the *response* for valid XML. An invalid request
             raises :py:class:ColourLoversError. An invalid request is determined
-            by an empty response XML. ColourLovers does not provide 
+            by an empty response XML. ColourLovers does not provide
             additional error infomation.
-            
+
             Keywords arguments:
             response -- string as returned by the ColourLovers API.
         """
