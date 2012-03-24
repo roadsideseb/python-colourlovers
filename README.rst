@@ -23,6 +23,11 @@ The ColourLovers.com API is provided under the Creative Commons
 http://www.colourlovers.com/api for more information on the license
 and Terms Of Use.
 
+You find the source code and the latest development version on github: 
+https://github.com/elbaschid/python-colourlovers. That's also the place
+where you can leave feedback and contribute your own code. Just fork the
+repo, make your changes and send me a pull request :) 
+
 
 Colours
 -------
@@ -38,7 +43,7 @@ colour or a list of colours.
    return a list of ``ColourLovers.Colour`` objects.
 
 For details on additional parameters please refer to the documentation at
-http://python-colourlovers.readthedoc.org
+http://python-colourlovers.readthedocs.org
 
 Example::
 
@@ -65,7 +70,7 @@ palette or a list of palettes:
    return a list of ``ColourLovers.Palette`` objects.
 
 For details on additional parameters please refer to the documentation at
-http://python-colourlovers.readthedoc.org
+http://python-colourlovers.readthedocs.org
 
 Example::
 
@@ -90,7 +95,7 @@ pattern or a list of patterns.
    return a list of ``ColourLovers.Pattern`` objects.
 
 For details on additional parameters please refer to the documentation at
-http://python-colourlovers.readthedoc.org
+http://python-colourlovers.readthedocs.org
 
 Example::
 
@@ -117,7 +122,7 @@ The ColourLovers.com API provides two different ways to retrieve a
    ``ColourLovers.Lover`` objects.
 
 For details on additional parameters please refer to the documentation at
-http://python-colourlovers.readthedoc.org
+http://python-colourlovers.readthedocs.org
 
 
 Example::
