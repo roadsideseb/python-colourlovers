@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import mock
-import unittest
+import unittest2
 
 from datetime import datetime
 
@@ -32,7 +32,7 @@ except ImportError:
     from elementtree import ElementTree
 
 
-class TestARgbValue(unittest.TestCase):
+class TestARgbValue(unittest2.TestCase):
 
     def test_can_be_created_from_xml(self):
         xml = "<rgb><red>107</red><green>65</green><blue>6</blue></rgb>"
@@ -45,7 +45,7 @@ class TestARgbValue(unittest.TestCase):
         self.assertEquals(rgb.hex, '#6b4106')
 
 
-class TestAHsvValue(unittest.TestCase):
+class TestAHsvValue(unittest2.TestCase):
 
     def test_can_be_created_from_xml(self):
         xml = "<hsv><hue>35</hue>" +\
@@ -266,7 +266,7 @@ class TestLover(FixtureTestCase):
         )
 
 
-class TestStat(unittest.TestCase):
+class TestStat(unittest2.TestCase):
 
     def test_can_be_created_from_xml(self):
         xml = ElementTree.XML('<stats><total>1500563</total></stats>')
@@ -275,7 +275,7 @@ class TestStat(unittest.TestCase):
         self.assertEquals(stat.total, 1500563)
 
 
-class TestColourLoversApi(unittest.TestCase):
+class TestColourLoversApi(unittest2.TestCase):
 
     def test_can_retrieve_color_from_hex_value(self):
         cl_api = cl.ColourLovers()

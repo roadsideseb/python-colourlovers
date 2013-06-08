@@ -1,7 +1,7 @@
-import unittest
+import unittest2
 
 
-class FixtureTestCase(unittest.TestCase):
+class FixtureTestCase(unittest2.TestCase):
     fixtures = []
 
     def setUp(self):
