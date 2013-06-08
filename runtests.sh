@@ -1,2 +1,2 @@
 #! /bin/bash
-nosetests --with-specplugin $@
+nosetests $@ --with-specplugin -s
