@@ -21,7 +21,7 @@ from setuptools import setup
 
 setup(
     name = 'python-colourlovers',
-    version = '0.0.1',
+    version = '0.1.0',
     author = 'Sebastian Vetter',
     author_email = 'sebastian@roadside-developer.com',
     url = 'http://python-colourlovers.readthedocs.org',
