@@ -56,8 +56,7 @@ Another example::
 """
 
 import re
-import urllib
-import urllib2
+import requests
 
 from datetime import datetime
 
@@ -72,6 +71,7 @@ DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 class ColourLoversError(BaseException):
     pass
+
 
 class Base(object):
     """ Define the base class for content types as provided
@@ -216,6 +216,7 @@ class Base(object):
         """
         return [float(x.strip()) for x in value.split(',')]
 
+
 class RGB(object):
     """ Define a RGB colour as a triple of integers in the
         range from 0 to 255. The colour channels are stored in
@@ -312,6 +313,7 @@ class HSV(object):
             self.value
         )
 
+
 class Comment(object):
     """ The comment class represents a comment for a ColourLovers
         user as returned by the *lovers* API request. The comment
@@ -348,6 +350,7 @@ class Comment(object):
             xml.find('commentUserName').text,
             xml.find('commentComments').text
         )
+
 
 class Colour(Base):
     """ This class defines a ColourLovers colour in the RGB and
@@ -396,6 +399,7 @@ class Colour(Base):
             self.rgb.blue
         )
 
+
 class Palette(Base):
 
     def __init__(self, **kwargs):
@@ -422,6 +426,7 @@ class Palette(Base):
             self.id,
             self.title.encode('ascii', 'ignore'),
         )
+
 
 class Pattern(Base):
 
@@ -450,6 +455,7 @@ class Pattern(Base):
             self.title.encode('ascii', 'ignore'),
         )
 
+
 class Lover(Base):
 
     def __init__(self, **kwargs):
@@ -476,6 +482,7 @@ class Lover(Base):
             self.user_name.encode('ascii', 'ignore')
         )
 
+
 class Stat(Base):
 
     def __init__(self, total, **kwargs):
@@ -492,6 +499,7 @@ class Stat(Base):
             self.__class__.__name__,
             self.total,
         )
+
 
 class ColourLovers(object):
 
@@ -518,20 +526,23 @@ class ColourLovers(object):
         pass
 
     def stats(self, stat_type):
-        """ Return the stats for *stat_type*. *stat_type* refers to one
-            of the content types on ColourLovers and can be ``colors``,
-            ``lovers``, ``patterns``, ``palettes``. A
-            :py:exc:`ColourLoversError` is raised when an invalid type is
-            requested.
+        """
+        Return the stats for *stat_type*. *stat_type* refers to one
+        of the content types on ColourLovers and can be ``colors``,
+        ``lovers``, ``patterns``, ``palettes``. A
+        :py:exc:`ColourLoversError` is raised when an invalid type is
+        requested.
 
-            Args:
-                *stat_type (str)*: content type to request stats for.
+        Args:
+            *stat_type (str)*: content type to request stats for.
 
-            Returns:
-                The requested stats as :py:class:`Stat` object.
+        Returns:
+            The requested stats as :py:class:`Stat` object.
         """
         if stat_type not in ['colors', 'lovers', 'patterns', 'palettes']:
-            raise ColourLoversError("cannot retrieve stats for '%s'", stat_type)
+            raise ColourLoversError(
+                "cannot retrieve stats for '%s'", stat_type
+            )
 
         xml = self.__call('stats', stat_type)
 
@@ -542,8 +553,8 @@ class ColourLovers(object):
             raise ColourLoversError("invalid API method '%s'", method)
 
         def proxy(argument=None, method=method, **kwargs):
-            if method in self.__SEARCH_METHODS \
-                and argument not in self.__ARGUMENTS:
+            if (method in self.__SEARCH_METHODS
+                and argument not in self.__ARGUMENTS):
                     raise ColourLoversError(
                         "%s is invalid argument for '%s'" % (argument, method)
                     )
@@ -577,13 +588,12 @@ class ColourLovers(object):
 
         converted_kwargs = self.convert_keywords(kwargs)
 
-        request = urllib2.Request(
+        response = requests.get(
             url,
-            data=urllib.urlencode(converted_kwargs),
+            data=converted_kwargs,
             headers={'User-Agent': "ColourLovers Browser"}
         )
-
-        return self.__check_response(urllib2.urlopen(request).read())
+        return self._check_response(response)
 
     @classmethod
     def valid_methods(cls):
@@ -606,17 +616,24 @@ class ColourLovers(object):
         return converted
 
     @staticmethod
-    def __check_response(response):
-        """ Check the *response* for valid XML. An invalid request
-            raises :py:class:ColourLoversError. An invalid request is determined
-            by an empty response XML. ColourLovers does not provide
-            additional error infomation.
+    def _check_response(response):
+        """
+        Check the *response* for valid XML. An invalid request raises
+        :py:class:ColourLoversError. An invalid request is determined by an
+        empty response XML. ColourLovers does not provide additional error
+        infomation.
 
-            Keywords arguments:
+        Keywords arguments:
             response -- string as returned by the ColourLovers API.
         """
+        if response.status_code != 200:
+            raise ColourLoversError(
+                "received %s error: %s",
+                response.status_code,
+                response.reason,
+            )
         try:
-            xml = ElementTree.XML(response)
+            xml = ElementTree.XML(response.content)
         except:
             raise ColourLoversError(
                 "could not retrieve result for your request"

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lover>
+    <id>12345</id>
+    <userName><![CDATA[electrikmönk]]></userName>
+    <dateRegistered>2005-08-07 6:45:47</dateRegistered>
+    <dateLastActive>2008-03-16 21:02:01</dateLastActive>
+    <rating>554159</rating>
+    <location><![CDATA[#FF0000stick, LA, US]]></location>
+    <numColors>3,498</numColors>
+    <numPalettes>2,775</numPalettes>
+    <numPatterns>36</numPatterns>
+    <numCommentsMade>7,201</numCommentsMade>
+    <numLovers>710</numLovers>
+    <numCommentsOnProfile>672</numCommentsOnProfile>
+    <!-- Optional comments [Only returned when viewing one Lover with the ?comments=1] -->
+    <comments>
+        <comment>
+            <commentDate>2008-03-10 05:10:58</commentDate>
+            <commentUserName><![CDATA[mashedpotato]]></commentUserName>
+            <commentComments><![CDATA[you are so awesome. :x ]]></commentComments>
+        </comment>
+    </comments>
+    <url><![CDATA[http://www.colourlovers.com/lover/electrikmonk]]></url>
+    <apiUrl><![CDATA[http://www.colourlovers.com/api/lover/electrikmonk]]></apiUrl>
+</lover>

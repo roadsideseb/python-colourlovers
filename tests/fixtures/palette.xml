@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<palette>
+    <id>12345</id>
+    <title><![CDATA[be my boy]]></title>
+    <userName><![CDATA[sinta schneider]]></userName>
+    <numViews>1052</numViews>
+    <numVotes>37</numVotes>
+    <numComments>13</numComments>
+    <numHearts>4.5</numHearts>
+    <rank>1</rank>
+    <dateCreated>2008-03-01 16:19:21</dateCreated>
+    <colors>
+        <hex>423238</hex>
+        <hex>F5DE8C</hex>
+        <hex>C8D197</hex>
+        <hex>B3702D</hex>
+        <hex>EB2138</hex>
+    </colors>
+    <!-- Optional color widths [Only returned with the ?showPaletteWidths=1] -->
+    <colorWidths>0.2,0.2,0.2,0.2,0.2</colorWidths>
+    <description><![CDATA[]]></description>
+    <url><![CDATA[http://www.colourlovers.com/palette/293826/be_my_boy]]></url>
+    <imageUrl><![CDATA[http://www.colourlovers.com/paletteImg/423238/F5DE8C/C8D197/B3702D/EB2138/be_my_boy.png]]></imageUrl>
+    <badgeUrl><![CDATA[http://www.colourlovers.com/images/badges/p/293/293826_be_my_boy.png]]></badgeUrl>
+    <apiUrl>http://www.colourlovers.com/api/palette/293826</apiUrl>
+</palette>
