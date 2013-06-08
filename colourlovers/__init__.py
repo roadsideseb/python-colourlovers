@@ -55,6 +55,13 @@ Another example::
      <Colour id='1086335' title='dutch teal' rgb=(22, 147, 165)>]
 """
 
+__title__ = 'colourlovers'
+__version__ = '0.1.0'
+__author__ = 'Sebastian Vetter'
+__license__ = 'GNU General Public License (GPL)'
+__copyright__ = 'Copyright 2013 Sebastian Vetter'
+
+
 import re
 import requests
 

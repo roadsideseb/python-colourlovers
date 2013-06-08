@@ -16,30 +16,26 @@
 #
 # You should have received a copy of the GNU General Public License
 
+import colourlovers
+
 from setuptools import setup
 
 
 setup(
     name = 'python-colourlovers',
-    version = '0.1.0',
+    version = colourlovers.__version__,
     author = 'Sebastian Vetter',
     author_email = 'sebastian@roadside-developer.com',
     url = 'http://python-colourlovers.readthedocs.org',
-
     description = 'An API providing access to the ColourLovers website.',
-    long_description = open('README.rst', 'r').read(),
+    long_description = open('README.rst').read() + '\n\n' +
+                       open('CHANGELOG.rst').read(),
 
-    packages = [
-        'colourlovers',
-    ],
-
-    requires=[
-        'requests>=1.0',
-    ],
-
+    packages = ['colourlovers'],
+    requires=['requests>=1.0'],
     provides = ['colourlovers'],
-    license = 'GNU General Public License (GPL)',
 
+    license = 'GNU General Public License (GPL)',
     classifiers = [
         'Development Status :: 4 - Beta',
         'Environment :: Console',
