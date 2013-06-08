@@ -32,8 +32,8 @@ setup(
                        open('CHANGELOG.rst').read(),
 
     packages = ['colourlovers'],
-    requires=['requests>=1.0'],
     provides = ['colourlovers'],
+    install_requires=['requests>=1.0'],
 
     license = 'GNU General Public License (GPL)',
     classifiers = [
