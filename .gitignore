@@ -1,7 +1,14 @@
 MANIFEST
 *.py[oc]
 *.sw[op]
+*.egg-info
+
+.tox
+.coverage
+.coveralls.yml
 
 build
 dist
+cover/
 docs/_build
+*.egg-info/
