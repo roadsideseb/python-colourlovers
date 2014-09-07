@@ -1,3 +1,2 @@
-include changelog.txt
-include README.rst
+include *.rst
 include LICENSE

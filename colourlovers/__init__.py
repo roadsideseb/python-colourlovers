@@ -597,7 +597,7 @@ class ColourLovers(object):
 
         response = requests.get(
             url,
-            data=converted_kwargs,
+            params=converted_kwargs,
             headers={'User-Agent': "ColourLovers Browser"}
         )
         return self._check_response(response)
