@@ -3,13 +3,13 @@ python:
   - 2.6
   - 2.7
 env:
-  - REQUESTS_VERSION=">=1.0,<1.1"
-  - REQUESTS_VERSION=">=1.1,<1.2"
-  - REQUESTS_VERSION=">=1.2"
+  - REQUESTS_VERSION=">=1.0,<2.0"
+  - REQUESTS_VERSION=">=2.0"
 install:
+  - pip install -e .
   - pip install -q requests$REQUESTS_VERSION
   - pip install -r requirements_test.txt
 script:
-  - ./runtests.sh --with-coverage --cover-package=colourlovers
+  - py.test --cov colourlovers
 after_success:
   - coveralls

@@ -5,6 +5,7 @@ MANIFEST
 
 .tox
 .coverage
+.cache/
 .coveralls.yml
 
 build
