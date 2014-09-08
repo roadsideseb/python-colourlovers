@@ -56,7 +56,7 @@ Another example::
 """
 
 __title__ = 'colourlovers'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __author__ = 'Sebastian Vetter'
 __license__ = 'GNU General Public License (GPL)'
 __copyright__ = 'Copyright 2013 Sebastian Vetter'
