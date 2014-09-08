@@ -423,16 +423,14 @@ class Palette(Base):
         inst = super(Palette, cls).from_xml(xml)
 
         for hex_colour in xml.findall('colors/hex'):
-            inst.colours.append('#'+hex_colour.text.lower())
+            inst.colours.append('#' + hex_colour.text.lower())
 
         return inst
 
     def __repr__(self):
         return u"<%s id='%d' title='%s'>" % (
-            self.__class__.__name__,
-            self.id,
-            self.title.encode('ascii', 'ignore'),
-        )
+            self.__class__.__name__, self.id,
+            self.title.encode('ascii', 'ignore'))
 
 
 class Pattern(Base):
@@ -451,16 +449,14 @@ class Pattern(Base):
         inst = super(Pattern, cls).from_xml(xml)
 
         for hex_colour in xml.findall('colors/hex'):
-            inst.colours.append('#'+hex_colour.text.lower())
+            inst.colours.append('#' + hex_colour.text.lower())
 
         return inst
 
     def __repr__(self):
         return u"<%s id='%d' title='%s'>" % (
-            self.__class__.__name__,
-            self.id,
-            self.title.encode('ascii', 'ignore'),
-        )
+            self.__class__.__name__, self.id,
+            self.title.encode('ascii', 'ignore'))
 
 
 class Lover(Base):
@@ -485,9 +481,7 @@ class Lover(Base):
 
     def __repr__(self):
         return u"<%s username='%s'>" % (
-            self.__class__.__name__,
-            self.user_name.encode('ascii', 'ignore')
-        )
+            self.__class__.__name__, self.user_name.encode('ascii', 'ignore'))
 
 
 class Stat(Base):
@@ -502,10 +496,7 @@ class Stat(Base):
         return cls(xml.find('total').text)
 
     def __repr__(self):
-        return u"<%s total='%d'>" % (
-            self.__class__.__name__,
-            self.total,
-        )
+        return u"<%s total='%d'>" % (self.__class__.__name__, self.total)
 
 
 class ColourLovers(object):
@@ -548,23 +539,22 @@ class ColourLovers(object):
         """
         if stat_type not in ['colors', 'lovers', 'patterns', 'palettes']:
             raise ColourLoversError(
-                "cannot retrieve stats for '%s'", stat_type
-            )
+                "cannot retrieve stats for '%s'", stat_type)
 
         xml = self.__call('stats', stat_type)
 
         return Stat.from_xml(xml)
 
     def __getattr__(self, method):
-        if method not in self.__SPECIFIC_METHODS+self.__SEARCH_METHODS:
+        if method not in self.__SPECIFIC_METHODS + self.__SEARCH_METHODS:
             raise ColourLoversError("invalid API method '%s'", method)
 
         def proxy(argument=None, method=method, **kwargs):
-            if (method in self.__SEARCH_METHODS
-                and argument not in self.__ARGUMENTS):
+            if method in self.__SEARCH_METHODS \
+               and argument not in self.__ARGUMENTS:
                     raise ColourLoversError(
-                        "%s is invalid argument for '%s'" % (argument, method)
-                    )
+                        "%s is invalid argument for '%s'" % (argument, method))
+
             xml = self.__call(method, argument, **kwargs)
             return self.__process(method, xml)
 
@@ -596,15 +586,13 @@ class ColourLovers(object):
         converted_kwargs = self.convert_keywords(kwargs)
 
         response = requests.get(
-            url,
-            params=converted_kwargs,
-            headers={'User-Agent': "ColourLovers Browser"}
-        )
+            url, params=converted_kwargs,
+            headers={'User-Agent': "ColourLovers Browser"})
         return self._check_response(response)
 
     @classmethod
     def valid_methods(cls):
-        return cls.__SPECIFIC_METHODS+cls.__SEARCH_METHODS+['stats']
+        return cls.__SPECIFIC_METHODS + cls.__SEARCH_METHODS + ['stats']
 
     def convert_keywords(self, keywords):
         converted = {}
@@ -635,14 +623,10 @@ class ColourLovers(object):
         """
         if response.status_code != 200:
             raise ColourLoversError(
-                "received %s error: %s",
-                response.status_code,
-                response.reason,
-            )
+                "received %s error: %s", response.status_code, response.reason)
         try:
             xml = ElementTree.XML(response.content)
         except:
             raise ColourLoversError(
-                "could not retrieve result for your request"
-            )
+                "could not retrieve result for your request")
         return xml
