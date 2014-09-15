@@ -2,6 +2,13 @@
 Changelog
 =========
 
+0.1.1
+-----
+
+* Added missing file to CHANGELOG.txt (fixes #6 thanks @portnov).
+* Correct options when submitting HTTP requests using the ``requests``
+  library (fixes #8 thanks to @portnov).
+
 0.1.0
 -----
 
