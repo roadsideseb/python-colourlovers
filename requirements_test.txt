@@ -1,14 +1,14 @@
-unittest2==0.5.1
+unittest2==1.0.1
 mock==1.0.1
-httpretty==0.8.3
+httpretty==0.8.9
 coverage==3.7.1
-coveralls==0.4.2
-flake8==2.2.3
+coveralls==0.5
+flake8==2.4
 
-pytest==2.6.2
-pytest-cov==1.8.0
+pytest==2.7.0
+pytest-cov==1.8.1
 pytest-cache==1.0
-pytest-sugar==0.3.4
+pytest-sugar==0.4.0
 pytest-pep8==1.0.6
 
 bumpversion
