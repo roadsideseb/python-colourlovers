@@ -1,7 +1,7 @@
 unittest2==1.1.0
 mock==2.0.0
 httpretty==0.8.14
-coverage==4.5
+coverage==4.5.1
 coveralls==1.2.0
 flake8==3.5.0
 
