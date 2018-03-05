@@ -4,10 +4,10 @@ The ColourLovers Python API
 .. image:: https://travis-ci.org/elbaschid/python-colourlovers.png?branch=master
     :target: https://travis-ci.org/elbaschid/python-colourlovers
 
-.. image:: https://pypip.in/v/python-colourlovers/badge.png
+.. image:: https://img.shields.io/pypi/v/python-colourlovers.svg
     :target: https://crate.io/packages/python-colourlovers/
 
-.. image:: https://pypip.in/d/python-colourlovers/badge.png
+.. image:: https://img.shields.io/pypi/dm/python-colourlovers.svg
     :target: https://crate.io/packages/python-colourlovers/
 
 
