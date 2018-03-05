@@ -7,9 +7,6 @@ The ColourLovers Python API
 .. image:: https://img.shields.io/pypi/v/python-colourlovers.svg
     :target: https://crate.io/packages/python-colourlovers/
 
-.. image:: https://img.shields.io/pypi/dm/python-colourlovers.svg
-    :target: https://crate.io/packages/python-colourlovers/
-
 
 This Python package ``python-colourlovers`` access to the ColourLovers.com
 API, a web service that allows users to publish colour themes and rate them.
