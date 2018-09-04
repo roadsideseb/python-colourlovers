@@ -6,7 +6,7 @@ coveralls==1.5.0
 flake8==3.5.0
 
 pytest==3.7.4
-pytest-cov==2.5.1
+pytest-cov==2.6.0
 pytest-cache==1.0
 pytest-sugar==0.9.1
 pytest-pep8==1.0.6
