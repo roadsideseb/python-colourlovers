@@ -1,5 +1,5 @@
 unittest2==1.1.0
-mock==3.0.3
+mock==3.0.4
 httpretty==0.9.6
 coverage==4.5.3
 coveralls==1.7.0
