@@ -3,9 +3,9 @@ mock==4.0.2
 httpretty==1.0.2
 coverage==5.1
 coveralls==2.0.0
-flake8==3.8.1
+flake8==3.8.2
 
-pytest==5.4.2
+pytest==5.4.3
 pytest-cov==2.9.0
 pytest-cache==1.0
 pytest-sugar==0.9.3
